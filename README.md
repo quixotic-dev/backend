@@ -35,7 +35,7 @@ It supports the following important features:
 
 ## Implementation
 
-Quix has a Next.js / React frontend deployed on Vercel and a Django backend deployed on Heroku. We make extensive use of
+Quix has a Next.js / React [frontend](https://github.com/quixotic-dev/frontend) deployed on Vercel and a Django backend deployed on Heroku. We make extensive use of
 the [Django REST framework](https://www.django-rest-framework.org/) and the Django ORM. The backend has the following 
 pieces of infrastructure:
 
