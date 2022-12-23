@@ -1,0 +1,119 @@
+# Schema documented at https://render.com/docs/yaml-spec
+
+services:
+  - type: worker
+    name: quixotic-websocket-tokens
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python ws_tokens.py
+    plan: pro max
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: worker
+    name: quixotic-websocket-tokens-all
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python ws_tokens_all.py
+    plan: pro max
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: worker
+    name: quixotic-websocket-tokens-l1
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python ws_tokens_l1.py
+    plan: pro max
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: worker
+    name: quixotic-websocket-collections
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python ws_collections.py
+    plan: standard
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: cron
+    name: quixotic-pull-new-collections
+    schedule: "*/10 * * * *"
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python manage.py pull_new_collections
+    plan: standard
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: cron
+    name: quixotic-pull-new-transfers
+    schedule: "*/3 * * * *"
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python manage.py pull_new_transfers
+    plan: standard
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: cron
+    name: quixotic-pull-new-transfers-erc721
+    schedule: "*/3 * * * *"
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python manage.py pull_new_transfers_erc721
+    plan: standard
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: cron
+    name: quixotic-pull-new-transfers-erc1155
+    schedule: "*/3 * * * *"
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python manage.py pull_new_transfers_erc1155
+    plan: standard
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: cron
+    name: quixotic-pull-new-tokens
+    schedule: "*/15 * * * *"
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python manage.py pull_new_tokens
+    plan: standard
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: cron
+    name: quixotic-pull-media
+    schedule: "*/15 * * * *"
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python manage.py pull_new_media
+    plan: standard
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: cron
+    name: quixotic-refresh-orders-short
+    schedule: "*/5 * * * *"
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python manage.py refresh_orders_short
+    plan: standard
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
+  - type: cron
+    name: quixotic-refresh-collections
+    schedule: "0 * * * *"
+    env: docker
+    dockerfilePath: Dockerfile.render
+    dockerCommand: python manage.py refresh_collections
+    plan: standard
+    branch: main
+    envVars:
+      - fromGroup: quixotic-mainnet
