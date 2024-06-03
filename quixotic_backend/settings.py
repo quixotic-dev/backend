@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     "api",
     "launchpad",
     "batch_processing",
-    "django_celery_beat",  # library
+    # "django_celery_beat",  # library
 ]
 
 if DEBUG_TOOLBAR:
